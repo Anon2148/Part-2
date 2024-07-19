@@ -2,13 +2,10 @@ import Title from "./Title";
 import Part from "./Part";
 
 const Course = ({ course }) => {
-  const countAll = () => {
-    let sum = 0;
-    course.parts.forEach((part) => {
-      sum += part.exercises;
-    });
-    return sum;
-  };
+  const total = course.parts.reduce((s, p) => {
+    console.log("what is happening", s, p);
+    return s + p.exercises;
+  }, 0);
 
   return (
     <>
@@ -16,7 +13,7 @@ const Course = ({ course }) => {
       {course.parts.map((part) => (
         <Part key={part.id} name={part.name} exercises={part.exercises} />
       ))}
-      <b>total of {countAll()} exercises</b>
+      <b>total of {total} exercises</b>
     </>
   );
 };
