@@ -42,17 +42,26 @@ const App = () => {
       number: newNumber,
     };
     if (
-      persons.filter((person) => person.name === newPerson.name).length !== 0
+      persons.filter((person) => person.name === newPerson.name).length === 1 &&
+      window.confirm(
+        `${newPerson.name} is already added to phonebook, replace the old number with a new one?`
+      )
     ) {
-      alert(`${newName} is already added to phonebook`);
+      const person = persons.find((p) => p.name === newName);
+      const updatedPerson = { ...person, number: newNumber };
+      personService.update(updatedPerson.id, updatedPerson).then((response) => {
+        setPersons(
+          persons.map((p) => (p.id !== updatedPerson.id ? p : response))
+        );
+      });
     } else {
       personService.create(newPerson).then((addedPerson) => {
         setPersons(persons.concat(addedPerson));
-        setNewName("");
-        setNewNumber("");
-        setNewFilter("");
       });
     }
+    setNewName("");
+    setNewNumber("");
+    setNewFilter("");
   };
 
   const handleDeletion = (id) => {
