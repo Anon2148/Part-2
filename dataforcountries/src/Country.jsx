@@ -1,7 +1,6 @@
 import "./index.css";
 
 const Country = ({ country }) => {
-  console.log(country);
   const languages = Object.entries(country.languages).map((key) => {
     return <li key={key}>{key[1]}</li>;
   });

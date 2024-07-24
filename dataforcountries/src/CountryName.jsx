@@ -1,7 +1,10 @@
-const CountryName = ({ name }) => {
+const CountryName = ({ country, handleClick }) => {
   return (
     <>
-      {name}
+      {country.name.common}{" "}
+      <button onClick={handleClick} value={country.name.common}>
+        show
+      </button>
       <br />
     </>
   );

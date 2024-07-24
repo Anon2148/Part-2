@@ -36,7 +36,10 @@ function App() {
       find countries{" "}
       <input value={searchCountry} onChange={handleSearchCountry} />
       <br />
-      <RenderCountries countries={countriesToShow} />
+      <RenderCountries
+        countries={countriesToShow}
+        setSearchCountry={setSearchCountry}
+      />
     </div>
   );
 }
